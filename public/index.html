@@ -1,17 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
         "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Hello Angular !</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Hello Angular !</title>
 
-    <script type="text/javascript" src="/lib/jquery.js"></script>
-    <script type="text/javascript" src="/lib/underscore.js"></script>
-    <script type="text/javascript" src="/lib/angular.js"></script>
+        <script type="text/javascript" src="/lib/jquery.js"></script>
+        <script type="text/javascript" src="/lib/underscore.js"></script>
+        <script type="text/javascript" src="/lib/angular.js"></script>
+        <script type="text/javascript" src="/lib/angular-route.js"></script>
+        <script type="text/javascript" src="/lib/angular-animate.js"></script>
+        <script type="text/javascript" src="/lib/angular-resource.js"></script>
 
-    <script type="text/javascript" src="/lib/main.js"></script>
-</head>
-<body>
-    Hello angular
-</body>
+        <script type="text/javascript" src="/javascript/main.js"></script>
+    </head>
+    <body ng-app="myApp">
+        Hello angular
+
+        <div ng-view>
+
+        </div>
+
+    </body>
 </html>

@@ -6,16 +6,19 @@
     <!-- libs -->
     <group name="libs">
         <js>/js/libs/moment.js</js>
-        <js>/js/libs/jquery.js</js>
+        <js>/js/libs/jquery/jquery.js</js>
+        <js>/js/libs/jquery/plugins/**.js</js>
         <js>/js/libs/underscore.js</js>
-        <js>/js/libs/angular.js</js>
-        <js>/js/libs/angular-*.js</js>
+        <js>/js/libs/angular/angular.js</js>
+        <js>/js/libs/angular/angular-*.js</js>
+        <js>/js/libs/angular/plugin/**.js</js>
     </group>
 
     <group name="base-css">
         <css>/css/reset.css</css>
         <css>/css/variables.less</css>
         <css>/css/main.less</css>
+        <css>/css/components/*.less</css>
     </group>
 
     <!-- FO -->

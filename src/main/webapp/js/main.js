@@ -3,15 +3,20 @@
 var myApp = angular.module('myApp', ["ngRoute", "ngAnimate", "ngResource"]);
 
 
-myApp.config(["$routeProvider", function($routeProvider) {
+myApp.config(["$routeProvider", "$httpProvider", function($routeProvider, $httpProvider) {
+
+    $httpProvider.interceptors.push('unwrappingResponseInterceptor');
 
     $routeProvider
         .when("/login", {
             controller: "LoginController",
             templateUrl: '/js/login/templates/Login.html',
             resolve : {
-                "user" : function() {
-                }
+                "user" : ["$q", "$http", function($q, $http) {
+                    console.log("loading user");
+                    return $http.get("/rest/user");
+                    // return $q.defer().promise;
+                }]
             },
             security : { level : "public" }
         })
@@ -35,6 +40,20 @@ myApp.run(["$rootScope", "$location", "securityService", function($rootScope, $l
     });
 }]);
 
+
+myApp.factory("unwrappingResponseInterceptor", ["$q", function($q) {
+
+    return {
+        'response': function(response) {
+            console.log("*** response interceptor, ", response.headers("Content-Type"), response.data);
+            if(/json/.test(response.headers("Content-Type"))) {
+                response.data = response.response;
+            }
+            return response;
+        }
+    }
+
+}]);
 
 myApp.provider("securityService", [function() {
 
@@ -96,6 +115,36 @@ myApp.service("favoriteService", ["$http", function($http) {
     }
 
 }]);
+
+myApp.service("loaderService", [function() {
+
+    return {
+
+        show : function() {
+            $.blockUI({
+                message : '<div class="circle"></div><div class="circle1"></div>',
+                css : {
+                    backgroundColor: "transparent",
+                    border: "none"
+                }
+
+            });
+
+        },
+
+        hide : function() {
+            $.unblockUI();
+        },
+
+        showUntil : function(promise) {
+            // TODO
+        }
+
+
+    }
+
+}]);
+
 
 // http://pascalprecht.github.io/angular-translate/
 

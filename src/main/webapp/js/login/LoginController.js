@@ -1,6 +1,8 @@
 
-angular.module('myApp').controller("LoginController", ["$scope", function($scope) {
+angular.module('myApp').controller("LoginController", ["$scope", "loaderService", function($scope, loaderService) {
 
+
+    loaderService.show();
 
 
 

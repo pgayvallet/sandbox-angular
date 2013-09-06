@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Application context definition
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!--
+    <import resource="application-persistence-context.xml"/>
+    -->
+
+    <!-- org.springframework.context.support.PropertySourcesPlaceholderConfigurer -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="locations">
+            <list>
+                <value>classpath:config/common.properties</value>
+                <value>classpath:config/${ENV_NAME}.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <context:component-scan base-package="com.angular.sandbox" />
+
+    <bean id="wroFilter" class="ro.isdc.wro.http.ConfigurableWroFilter">
+        <property name="properties" ref="wroProperties"/>
+    </bean>
+
+    <bean id="wroProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:${wro.config}.properties" />
+    </bean>
+
+    <!--
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${smtp.host}" />
+        <property name="port" value="${smtp.port}" />
+        <property name="username" value="${smtp.username}" />
+        <property name="password" value="${smtp.password}" />
+
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+    </bean>
+    -->
+
+    <!--
+    <jpa:annotation-driven/>
+    -->
+
+    <!--
+    <bean id="firstResource" class="com.spark.traveler.rest.FirstResource" scope="request">
+        <property name="service" ref="firstService"/>
+    </bean>
+    -->
+
+</beans>

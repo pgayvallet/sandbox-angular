@@ -8,7 +8,7 @@ myApp.config(["$routeProvider", function($routeProvider) {
     $routeProvider
         .when("/login", {
             controller: "LoginController",
-            templateUrl: '/javascript/login/templates/Login.html',
+            templateUrl: '/js/login/templates/Login.html',
             resolve : {
                 "user" : function() {
                 }
@@ -96,8 +96,6 @@ myApp.service("favoriteService", ["$http", function($http) {
     }
 
 }]);
-
-// http://blog.xebia.com/2013/08/28/bootstraps-tabs-and-lazy-data-loading-in-angularjs/
 
 // http://pascalprecht.github.io/angular-translate/
 

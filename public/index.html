@@ -5,21 +5,26 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Hello Angular !</title>
 
+        <link rel="stylesheet" href="/css/main.css">
+
         <script type="text/javascript" src="/lib/jquery.js"></script>
         <script type="text/javascript" src="/lib/underscore.js"></script>
         <script type="text/javascript" src="/lib/angular.js"></script>
         <script type="text/javascript" src="/lib/angular-route.js"></script>
         <script type="text/javascript" src="/lib/angular-animate.js"></script>
         <script type="text/javascript" src="/lib/angular-resource.js"></script>
+        <script type="text/javascript" src="/lib/angular-cookies.js"></script>
+        <script type="text/javascript" src="/lib/angular-loader.js"></script>
 
         <script type="text/javascript" src="/javascript/main.js"></script>
+
+        <script type="text/javascript" src="/javascript/login/LoginController.js"></script>
+        <script type="text/javascript" src="/javascript/login/LoginDirectives.js"></script>
     </head>
     <body ng-app="myApp">
         Hello angular
 
-        <div ng-view>
-
-        </div>
+        <div ng-view></div>
 
     </body>
 </html>

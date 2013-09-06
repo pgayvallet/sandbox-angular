@@ -1,14 +1,22 @@
 
+<div class="home">
 
-Home.html !
+    Home.html !!!
 
-<div ng-controller="HomeController">
     <p>{{test}}</p>
 
     <div ng-repeat="item in favorites">
         <p>{{item.title}}</p>
     </div>
 
-    <my-directive/>
+    <my-directive></my-directive>
+
+    <my-pills>
+        <my-pill label="Coucou"></my-pill>
+        <my-pill label="Hihi"></my-pill>
+    </my-pills>
+
+    <ui-button class="koin" click="foo()">My Button</ui-button>
+
 
 </div>

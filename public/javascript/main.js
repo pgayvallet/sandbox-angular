@@ -6,11 +6,15 @@ var myApp = angular.module('myApp', ["ngRoute", "ngAnimate", "ngResource"]);
 myApp.config(["$routeProvider", function($routeProvider) {
 
     $routeProvider
-        .when('/home', {
-            templateUrl: 'templates/home.html',
-            controller: "HomeController"
+        .when("/login", {
+            controller: "LoginController",
+            templateUrl: '/javascript/login/templates/Login.html'
         })
-        .otherwise({redirectTo : "/home"})
+        .when('/home', {
+            controller: "HomeController",
+            templateUrl: 'templates/home.html'
+        })
+        .otherwise({redirectTo : "/login"})
 }]);
 
 
@@ -26,6 +30,11 @@ myApp.controller("HomeController", ["$scope", "favoriteService", "$http", functi
 
     $scope.test = "Koin";
 
+
+    $scope.foo = function() {
+        console.log("fooooo !");
+    };
+
     favoriteService.getFavorites().success(function(favorites) {
         $scope.favorites = favorites;
     });
@@ -33,7 +42,8 @@ myApp.controller("HomeController", ["$scope", "favoriteService", "$http", functi
 }]);
 
 myApp.directive('myDirective', function() {
-    var directive = {
+
+    return {
         restrict: 'E',
         templateUrl: '/templates/my-directive.html',
         replace: true,
@@ -47,7 +57,6 @@ myApp.directive('myDirective', function() {
         }
         // require: 'siblingDirectiveName', // or // ['^parentDirectiveName', '?optionalDirectiveName', '?^optionalParent'],
     };
-    return directive;
 });
 
 myApp.service("favoriteService", ["$http", function($http) {
@@ -64,11 +73,87 @@ myApp.service("favoriteService", ["$http", function($http) {
 
 // http://blog.xebia.com/2013/08/28/bootstraps-tabs-and-lazy-data-loading-in-angularjs/
 
+// http://pascalprecht.github.io/angular-translate/
 
-myApp.directive("myTabs", function() {
+// http://www.nganimate.org/
 
+// https://github.com/angular-ui/bootstrap/blob/gh-pages/ui-bootstrap-0.5.0.js -> $dialog
+
+myApp.directive('myPills', function () {
+
+    return {
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        controller: function($scope) {
+
+            var controller = this;
+            var tabs = $scope.tabs = [];
+
+            this.addTab = function (tab) {
+                if (tabs.length == 0) {
+                    controller.selectTab(tab);
+                }
+                tabs.push(tab);
+            };
+
+            this.selectTab = function (tab) {
+                _.each(tabs, function (tab) {
+                    tab.selected = false;
+                });
+                tab.selected = true;
+            };
+        },
+        template:
+            '<div class="pills">' +
+                '<div class="nav nav-tabs" ng-transclude></div>' +
+                '</div>'
+    };
 });
 
-myApp.directive("myTab", function() {
+myApp.directive('myPill', function () {
+    return {
+        restrict: 'E',
+        replace: true,
+        require: '^myPills',
+        scope: {
+            label: '@'
+        },
+        link: function($scope, $element, $attrs, pillsController) {
+            $scope.selected = false;
 
-})
+            pillsController.addTab($scope);
+
+            $scope.select = function () {
+                pillsController.selectTab($scope);
+            };
+
+        },
+        template:
+            '<div class="pill" ng-class="{active: selected}">' +
+                '<a href="#" ng-click="select()">{{ label }}</a>' +
+                '</div>'
+    };
+});
+
+myApp.directive("uiButton", function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        scope: {
+            class : "@",
+            clickHandler : '&click'
+        },
+        controller : function($scope) {
+            $scope.onClick = function($event) {
+                $event.preventDefault();
+                if($scope.clickHandler) {
+                    $scope.clickHandler();
+                }
+            };
+        },
+        template: '<a href="#" class="button {{class}}" ng-click="onClick($event);" ng-transclude></a>'
+    };
+
+});

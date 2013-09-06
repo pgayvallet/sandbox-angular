@@ -8,23 +8,49 @@ myApp.config(["$routeProvider", function($routeProvider) {
     $routeProvider
         .when("/login", {
             controller: "LoginController",
-            templateUrl: '/javascript/login/templates/Login.html'
+            templateUrl: '/javascript/login/templates/Login.html',
+            resolve : {
+                "user" : function() {
+                }
+            },
+            security : { level : "public" }
         })
         .when('/home', {
             controller: "HomeController",
             templateUrl: 'templates/home.html'
         })
-        .otherwise({redirectTo : "/login"})
+        .otherwise({
+            redirectTo : "/login"
+        });
 }]);
 
 
-myApp.run(["$rootScope", function($rootScope) {
+myApp.run(["$rootScope", "$location", "securityService", function($rootScope, $location, securityService) {
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
-        console.log("$routeChangeStart", arguments);
+        var routeSecurity = next.$$route.security;
+        var securityLevel = routeSecurity && routeSecurity.level || "private";
+        if(securityLevel=="private") {
+            $location.path("/login");
+        }
     });
 }]);
 
 
+myApp.provider("securityService", [function() {
+
+    var provider = this;
+
+    provider.roles = {
+
+    }
+
+    this.$get = ["$http", function($http) {
+        return {
+            roles : provider.roles
+        }
+    }];
+
+}]);
 
 myApp.controller("HomeController", ["$scope", "favoriteService", "$http", function($scope, favoriteService, $http) {
 

@@ -2,6 +2,7 @@ package com.angular.sandbox.rest.resource;
 
 import com.angular.sandbox.rest.dto.User;
 import com.angular.sandbox.rest.security.exception.AccessNotAllowedException;
+import com.angular.sandbox.rest.security.exception.AuthenticationFailureException;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -27,7 +28,11 @@ public class UserResource {
     @POST
     @Path("/authenticate")
     public User authenticate(@FormParam("username") String username, @FormParam("password") String password) {
-        return new User(1, "Admin");
+        if(username.equals("user")) {
+            return new User(1, "Admin");
+        } else {
+            throw new AuthenticationFailureException(-1);
+        }
     }
 
 }

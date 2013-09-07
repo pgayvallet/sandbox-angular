@@ -1,2 +1,2 @@
 
-angular.module("security.login", ["ui.bootstrap.dialog"]);
+angular.module("security.login", ["ui.bootstrap.dialog", "common.ui"]);

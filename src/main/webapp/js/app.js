@@ -7,7 +7,23 @@ var myApp = angular.module('myApp', ["security", "ngRoute", "ngAnimate", "ngReso
 
 myApp.config(["$routeProvider", "$httpProvider", "authorizationProvider", function($routeProvider, $httpProvider, authorizationProvider) {
 
+    // make angular using form data instead of json for $http.post params
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    $httpProvider.defaults.transformRequest.unshift(function(data) {
+        /*
+        function isFile(obj) {
+            return toString.apply(obj) === '[object File]';
+        }
+        */
+        if(_.isObject(data)) {
+            return $.param(data);
+        }
+        return data;
+    });
+
+
     $httpProvider.interceptors.push('unwrappingResponseInterceptor');
+
 
     $routeProvider
         /*

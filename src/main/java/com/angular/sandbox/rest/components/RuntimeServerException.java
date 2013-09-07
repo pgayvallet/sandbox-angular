@@ -19,4 +19,9 @@ public abstract class RuntimeServerException extends RuntimeException implements
         return -1;
     }
 
+    @Override
+    public Object getErrorDetails() {
+        return null;
+    }
+
 }

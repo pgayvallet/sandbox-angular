@@ -37,6 +37,7 @@
 
     <group name="front-scripts">
         <group-ref>common-security</group-ref>
+        <group-ref>common-ui</group-ref>
         <js>/js/app.js</js>
     </group>
 

@@ -1,2 +1,2 @@
 
-angular.module("common.ui", []);
+angular.module("common.ui", ["ngAnimate"]);

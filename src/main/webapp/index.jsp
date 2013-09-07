@@ -15,10 +15,10 @@
     </head>
     <c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request"/>
 
-    <body ng-app="myApp">
+    <body ng-app="myApp" id="ng-app">
 
         Hello angular
-        <div ng-view></div>
+        <div ng-view ng-cloak></div>
 
     </body>
 </html>

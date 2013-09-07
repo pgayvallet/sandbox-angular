@@ -1,11 +1,10 @@
 package com.angular.sandbox.rest.resource;
 
 import com.angular.sandbox.rest.dto.User;
+import com.angular.sandbox.rest.security.exception.AccessNotAllowedException;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -13,16 +12,22 @@ import javax.ws.rs.core.MediaType;
  *
  * @author spark <pierre.gayvallet@gmail.com>
  */
-@Path("/user")
 @Component
+@Path("/user")
 @Produces({MediaType.APPLICATION_JSON})
 public class UserResource {
 
-
     @GET
     public User getUser() {
-        return new User(1, "Admin");
+        throw new AccessNotAllowedException();
+
+        // return new User(1, "Admin");
     }
 
+    @POST
+    @Path("/authenticate")
+    public User authenticate(@FormParam("username") String username, @FormParam("password") String password) {
+        return new User(1, "Admin");
+    }
 
 }

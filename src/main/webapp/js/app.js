@@ -1,36 +1,43 @@
 
+// http://docs.angularjs.org/guide/ie
+// https://github.com/angular-app/angular-app/issues/126
 
-var myApp = angular.module('myApp', ["ngRoute", "ngAnimate", "ngResource"]);
+var myApp = angular.module('myApp', ["security", "ngRoute", "ngAnimate", "ngResource"]);
 
 
-myApp.config(["$routeProvider", "$httpProvider", function($routeProvider, $httpProvider) {
+myApp.config(["$routeProvider", "$httpProvider", "authorizationProvider", function($routeProvider, $httpProvider, authorizationProvider) {
 
     $httpProvider.interceptors.push('unwrappingResponseInterceptor');
 
     $routeProvider
+        /*
         .when("/login", {
             controller: "LoginController",
             templateUrl: '/js/login/templates/Login.html',
             resolve : {
-                "user" : ["$q", "$http", function($q, $http) {
-                    console.log("loading user");
-                    return $http.get("/rest/user");
-                    // return $q.defer().promise;
-                }]
             },
             security : { level : "public" }
         })
+        */
         .when('/home', {
             controller: "HomeController",
-            templateUrl: 'templates/home.html'
+            templateUrl: 'templates/home.html',
+            resolve : {
+                access : authorizationProvider.requireAuthenticatedUser
+            }
         })
         .otherwise({
-            redirectTo : "/login"
+            redirectTo : "/home"
         });
 }]);
 
 
-myApp.run(["$rootScope", "$location", "securityService", function($rootScope, $location, securityService) {
+myApp.run(["$rootScope", "$location", "security", function($rootScope, $location, security) {
+
+    security.requestCurrentUser();
+    /*
+
+
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
         var routeSecurity = next.$$route.security;
         var securityLevel = routeSecurity && routeSecurity.level || "private";
@@ -38,6 +45,7 @@ myApp.run(["$rootScope", "$location", "securityService", function($rootScope, $l
             $location.path("/login");
         }
     });
+    */
 }]);
 
 
@@ -45,9 +53,10 @@ myApp.factory("unwrappingResponseInterceptor", ["$q", function($q) {
 
     return {
         'response': function(response) {
-            console.log("*** response interceptor, ", response.headers("Content-Type"), response.data);
+            // console.log("*** response interceptor, ", response.headers("Content-Type"), response.data);
             if(/json/.test(response.headers("Content-Type"))) {
-                response.data = response.response;
+                console.log("*** unwrappingInterceptor");
+                response.data = response.data.response;
             }
             return response;
         }
@@ -93,14 +102,7 @@ myApp.directive('myDirective', function() {
         templateUrl: '/templates/my-directive.html',
         replace: true,
         transclude: false,
-        scope: false,
-        controller: function($scope, $element, $attrs, $transclude) {
-
-        },
-        link: function(scope, element, attrs) {
-            console.log("link : arguments", arguments);
-        }
-        // require: 'siblingDirectiveName', // or // ['^parentDirectiveName', '?optionalDirectiveName', '?^optionalParent'],
+        scope: false
     };
 });
 
@@ -115,6 +117,8 @@ myApp.service("favoriteService", ["$http", function($http) {
     }
 
 }]);
+
+// myApp.provider("application")
 
 myApp.service("loaderService", [function() {
 

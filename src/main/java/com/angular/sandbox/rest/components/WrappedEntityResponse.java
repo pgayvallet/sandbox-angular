@@ -17,4 +17,10 @@ public class WrappedEntityResponse {
         this.response = response;
         this.error = false;
     }
+
+    public WrappedEntityResponse(int statusCode) {
+        this.error = true;
+        this.status = statusCode;
+    }
+
 }

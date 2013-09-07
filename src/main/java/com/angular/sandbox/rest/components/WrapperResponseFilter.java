@@ -16,8 +16,11 @@ public class WrapperResponseFilter implements ContainerResponseFilter {
 
     @Override
     public ContainerResponse filter(ContainerRequest containerRequest, ContainerResponse containerResponse) {
-        WrappedEntityResponse wrappedResponse = new WrappedEntityResponse(containerResponse.getEntity());
-        containerResponse.setEntity(wrappedResponse);
+        Object responseEntity = containerResponse.getEntity();
+        if(!(responseEntity instanceof WrappedEntityResponse)) {
+            WrappedEntityResponse wrappedResponse = new WrappedEntityResponse(responseEntity);
+            containerResponse.setEntity(wrappedResponse);
+        }
         return containerResponse;
     }
 

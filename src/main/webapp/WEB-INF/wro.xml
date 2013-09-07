@@ -5,27 +5,39 @@
 
     <!-- libs -->
     <group name="libs">
+        <js>/js/libs/json2.js</js>
         <js>/js/libs/moment.js</js>
         <js>/js/libs/jquery/jquery.js</js>
         <js>/js/libs/jquery/plugins/**.js</js>
         <js>/js/libs/underscore.js</js>
         <js>/js/libs/angular/angular.js</js>
         <js>/js/libs/angular/angular-*.js</js>
-        <js>/js/libs/angular/plugin/**.js</js>
+        <js>/js/libs/angular/plugins/**.js</js>
     </group>
 
     <group name="base-css">
         <css>/css/reset.css</css>
         <css>/css/variables.less</css>
+        <css>/css/bootstrap.less</css>
         <css>/css/main.less</css>
         <css>/css/components/*.less</css>
     </group>
 
     <!-- FO -->
 
+    <group name="common-security">
+        <js>/js/common/security/**__module.js</js>
+        <js>/js/common/security/**.js</js>
+    </group>
+
+    <group name="common-ui">
+        <js>/js/common/ui/__module.js</js>
+        <js>/js/common/ui/*.js</js>
+    </group>
+
     <group name="front-scripts">
-        <js>/js/main.js</js>
-        <js>/js/login/**.js</js>
+        <group-ref>common-security</group-ref>
+        <js>/js/app.js</js>
     </group>
 
     <group name="app">

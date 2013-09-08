@@ -16,7 +16,12 @@ angular.module("security.login").factory('loginBox', ['$http', '$q', '$location'
             if ( loginDialog ) {
                 throw new Error('Trying to open a dialog that is already open!');
             }
-            loginDialog = $dialog.dialog();
+            loginDialog = $dialog.dialog({
+                backdropClick : false,
+                keyboard : false,
+                dialogFade : true,
+                transitionClass : "shake"
+            });
             loginDialog.open('/js/common/security/login/Login.html', 'LoginController')
                 .then(this.onLoginDialogClose);
         },

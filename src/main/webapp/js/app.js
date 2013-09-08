@@ -1,6 +1,7 @@
 
 // http://docs.angularjs.org/guide/ie
 // https://github.com/angular-app/angular-app/issues/126
+http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html#how-to-make-animations-in-angularjs
 
 var myApp = angular.module('myApp', ["security", "ngRoute", "ngAnimate", "ngResource"]);
 

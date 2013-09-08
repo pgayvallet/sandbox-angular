@@ -9,6 +9,8 @@ angular.module("security.login").controller("LoginController", ["$scope", "secur
 
             $scope.animation = "shake";
 
+            // $animate.addClass(element, class, done)
+
             console.log("login controller : catch login error", error);
 
         });

@@ -3,10 +3,14 @@
 // https://github.com/angular-app/angular-app/issues/126
 http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html#how-to-make-animations-in-angularjs
 
-var myApp = angular.module('myApp', ["security", "ngRoute", "ngAnimate", "ngResource"]);
+var myApp = angular.module('myApp', ["security", "ngRoute", "ngAnimate", "ngResource","pascalprecht.translate"]);
 
 
-myApp.config(["$routeProvider", "$httpProvider", "authorizationProvider", function($routeProvider, $httpProvider, authorizationProvider) {
+myApp.config(["$routeProvider", "$httpProvider", "$translateProvider", "authorizationProvider",
+    function($routeProvider, $httpProvider, $translateProvider, authorizationProvider) {
+
+    $translateProvider.useUrlLoader("/rest/translations");
+    $translateProvider.preferredLanguage('en_US');
 
     // make angular using form data instead of json for $http.post params
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';

@@ -1,16 +1,17 @@
 
 // http://docs.angularjs.org/guide/ie
 // https://github.com/angular-app/angular-app/issues/126
-http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html#how-to-make-animations-in-angularjs
+// http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html#how-to-make-animations-in-angularjs
+// http://pascalprecht.github.io/angular-translate/
+// http://www.nganimate.org/
+// https://github.com/angular-ui/bootstrap/blob/gh-pages/ui-bootstrap-0.5.0.js -> $dialog
 
-var myApp = angular.module('myApp', ["security", "ngRoute", "ngAnimate", "ngResource","pascalprecht.translate"]);
+
+var myApp = angular.module('myApp', ["ngRoute", "ngAnimate", "ngResource","common"]);
 
 
-myApp.config(["$routeProvider", "$httpProvider", "$translateProvider", "authorizationProvider",
-    function($routeProvider, $httpProvider, $translateProvider, authorizationProvider) {
-
-    $translateProvider.useUrlLoader("/rest/translations");
-    $translateProvider.preferredLanguage('en_US');
+myApp.config(["$routeProvider", "$httpProvider", "authorizationProvider",
+    function($routeProvider, $httpProvider, authorizationProvider) {
 
     // make angular using form data instead of json for $http.post params
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -74,9 +75,7 @@ myApp.factory("unwrappingResponseInterceptor", ["$q", function($q) {
 
     return {
         'response': function(response) {
-            // console.log("*** response interceptor, ", response.headers("Content-Type"), response.data);
             if(/json/.test(response.headers("Content-Type"))) {
-                console.log("*** unwrappingInterceptor");
                 response.data = response.data.response;
             }
             return response;
@@ -170,12 +169,6 @@ myApp.service("loaderService", [function() {
 
 }]);
 
-
-// http://pascalprecht.github.io/angular-translate/
-
-// http://www.nganimate.org/
-
-// https://github.com/angular-ui/bootstrap/blob/gh-pages/ui-bootstrap-0.5.0.js -> $dialog
 
 myApp.directive('myPills', function () {
 

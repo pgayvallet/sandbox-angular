@@ -35,9 +35,20 @@
         <js>/js/common/ui/*.js</js>
     </group>
 
-    <group name="front-scripts">
+    <group name="common-i18n">
+        <js>/js/common/i18n/__module.js</js>
+        <js>/js/common/i18n/*.js</js>
+    </group>
+
+    <group name="common">
+        <js>/js/common/__module.js</js>
         <group-ref>common-security</group-ref>
         <group-ref>common-ui</group-ref>
+        <group-ref>common-i18n</group-ref>
+    </group>
+
+    <group name="front-scripts">
+        <group-ref>common</group-ref>
         <js>/js/app.js</js>
     </group>
 

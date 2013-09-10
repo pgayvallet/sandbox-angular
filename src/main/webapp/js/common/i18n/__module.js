@@ -5,6 +5,7 @@ angular.module("common.i18n", ["pascalprecht.translate"])
     .config(["$translateProvider", function($translateProvider) {
 
         $translateProvider.useUrlLoader("/rest/translations");
+        $translateProvider.translationNotFoundIndicator("?");
         $translateProvider.preferredLanguage('en_US');
 
     }]);

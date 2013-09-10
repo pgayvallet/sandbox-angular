@@ -1,6 +1,8 @@
 
 angular.module("security.login").controller("LoginController", ["$scope", "security", function($scope, security) {
 
+    $scope.rememberMe = true;
+
     $scope.username = "";
     $scope.password = "";
 

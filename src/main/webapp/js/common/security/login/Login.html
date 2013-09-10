@@ -1,6 +1,8 @@
 <div class="login-box">
     <form name="loginForm" ng-submit="onLoginSubmit()">
 
+        <field-on-off model="rememberMe"></field-on-off>
+
         <label ng-class="animation" translate>text.first</label>
         <input name="username" ng-model="username" required>
 

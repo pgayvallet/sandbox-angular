@@ -40,9 +40,15 @@
         <js>/js/common/i18n/*.js</js>
     </group>
 
+    <group name="common-layout">
+        <js>/js/common/layout/__module.js</js>
+        <js>/js/common/layout/*.js</js>
+    </group>
+
     <group name="common">
         <js>/js/common/__module.js</js>
         <group-ref>common-security</group-ref>
+        <group-ref>common-layout</group-ref>
         <group-ref>common-ui</group-ref>
         <group-ref>common-i18n</group-ref>
     </group>

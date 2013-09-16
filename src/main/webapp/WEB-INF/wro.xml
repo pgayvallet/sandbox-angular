@@ -9,6 +9,7 @@
         <js>/js/libs/moment.js</js>
         <js>/js/libs/jquery/jquery.js</js>
         <js>/js/libs/jquery/plugins/**.js</js>
+        <css>/js/libs/jquery/plugins/**.css</css>
         <js>/js/libs/underscore.js</js>
         <js>/js/libs/angular/angular.js</js>
         <js>/js/libs/angular/angular-*.js</js>

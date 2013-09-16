@@ -97,6 +97,8 @@ myApp.controller("HomeController", ["$scope", "favoriteService", "$http", functi
 
     $scope.test = "Koin";
 
+    $scope.inputValue = "Input Value";
+
 
     $scope.foo = function() {
         console.log("fooooo !");

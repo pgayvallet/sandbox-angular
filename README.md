@@ -44,3 +44,5 @@ form validation
     http://docs.angularjs.org/guide/forms
     http://blog.brunoscopelliti.com/form-validation-the-angularjs-way
     http://stackoverflow.com/questions/15798594/angularjs-forms-validate-fields-after-user-has-left-field
+custom validation
+    http://stackoverflow.com/questions/12581439/how-to-add-custom-validation-to-an-angular-js-form

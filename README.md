@@ -24,4 +24,23 @@ http://pascalprecht.github.io/angular-translate/
 https://github.com/angular-ui/bootstrap/blob/gh-pages/ui-bootstrap-0.5.0.js -> $dialog
 
 // file upload
+polyfill for FileReader : https://github.com/Jahdrien/FileReader
+http://stackoverflow.com/questions/12979712/file-uploader-integration-for-angularjs
 http://blueimp.github.io/jQuery-File-Upload/angularjs.html
+
+// form widgets
+autocomplete :
+    http://jsfiddle.net/sebmade/swfjT/
+    http://ivaynberg.github.io/select2/
+checkbox list :
+    http://www.jqwidgets.com/jquery-widgets-demo/demos/jqxlistbox/index.htm
+    http://download.dojotoolkit.org/release-0.9.0beta/dojo-0.9.0beta/dijit/tests/form/test_Checkbox.html
+checkboxes & radios :
+    http://mgcrea.github.io/angular-strap/#/checkboxes
+date picker :
+    https://github.com/angular-ui/ui-date
+
+form validation
+    http://docs.angularjs.org/guide/forms
+    http://blog.brunoscopelliti.com/form-validation-the-angularjs-way
+    http://stackoverflow.com/questions/15798594/angularjs-forms-validate-fields-after-user-has-left-field
